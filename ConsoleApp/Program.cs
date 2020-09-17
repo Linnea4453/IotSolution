@@ -9,6 +9,7 @@ namespace ConsoleApp
     class Program 
     {
         private static readonly string _conn = "";   //"Här lägger du meddelande från azure, Connection string "
+       
         private static readonly DeviceClient deviceClient = DeviceClient
             .CreateFromConnectionString("_conn", TransportType.Mqtt);
 
@@ -16,7 +17,9 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
            DeviceService.SendMessageAsync(deviceClient).GetAwaiter();
+            DeviceService.ReciveMessageAsync(deviceClient).GetAwaiter();
 
+            Console.ReadKey();
         }
     }
 }
