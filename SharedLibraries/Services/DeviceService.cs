@@ -39,7 +39,7 @@ namespace SharedLibraries.Services
             }
         }       //Skicka meddelande
         //Deviceclient = iot (Bilden
-        public static async Task ReciveMessageAsync(DeviceClient deviceClient)   // Ta emot meddelnade
+        public static async Task ReciveMessageAsync(DeviceClient deviceClient)   
         { while (true)
             {
                 var payload = await deviceClient.ReceiveAsync();
@@ -62,6 +62,7 @@ namespace SharedLibraries.Services
         {
             var payload = new MAD.Message(Encoding.UTF8.GetBytes(message));
             await serviceClient.SendAsync(targetDeviceId, payload);
+
         }
     }
 }
