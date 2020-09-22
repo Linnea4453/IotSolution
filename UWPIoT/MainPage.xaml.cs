@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.Azure.Devices.Client;
+using SharedLibraryUWP.Services;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +27,30 @@ namespace UWPIoT
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        class Program
+        {
+            private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=ConsoleApp;SharedAccessKey=qeGeFlp6JF34sorATZI6QM8ik1bwGnWfE3/zeCLaE7E=";   //"Här lägger du meddelande från azure, Connection string "
+
+            private static readonly DeviceClient deviceClient = DeviceClient
+                .CreateFromConnectionString(_conn, TransportType.Mqtt);
+
+
+            static void Main(string[] args)
+            {
+
+                DeviceServiceUWP.SendMessageAsync(deviceClient).GetAwaiter();
+                DeviceServiceUWP.ReciveMessageAsync(deviceClient).GetAwaiter();
+
+                Console.ReadKey();
+
+
+            }
+
+
+
+
         }
     }
 }
