@@ -36,14 +36,14 @@ namespace SharedLibraryUWP.Services
                 var payload = new Message(Encoding.UTF8.GetBytes(json));
                 await deviceClient.SendEventAsync(payload);
 
-                Console.WriteLine($"Message sent {json}");
+           //     Console.WriteLine($"Message sent {json}");
 
-                await Task.Delay(10 * 1000);
+               // await Task.Delay(10 * 1000);
 
             }
         }       //Skicka meddelande
         //Deviceclient = iot (Bilden
-        public static async Task ReciveMessageAsync(DeviceClient deviceClient)
+       public static async Task ReciveMessageAsync(DeviceClient deviceClient)
         {
             while (true)
             {
@@ -67,6 +67,6 @@ namespace SharedLibraryUWP.Services
         {
             var payload = new MAD.Message(Encoding.UTF8.GetBytes(message));
             await serviceClient.SendAsync(targetDeviceId, payload);
-        }
+        } 
     }
 }

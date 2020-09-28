@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Microsoft.Azure.Devices.Client;
+using Microsoft.WindowsAzure.Storage.Table;
+using Newtonsoft.Json;
+using SharedLibraryUWP.ModelsUWP;
 using SharedLibraryUWP.Services;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -24,6 +29,7 @@ namespace UWPIoT
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public Message message = new Message();
         public MainPage()
         {
             this.InitializeComponent();
@@ -31,26 +37,41 @@ namespace UWPIoT
 
         class Program
         {
-            private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=ConsoleApp;SharedAccessKey=qeGeFlp6JF34sorATZI6QM8ik1bwGnWfE3/zeCLaE7E=";   //"Här lägger du meddelande från azure, Connection string "
+            private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=UWPIot;SharedAccessKey=OBlP9NT32G2sMTUoe3OyyWfvK51jwoSQAlbbFSuNYYE=";   //"Här lägger du meddelande från azure, Connection string "
 
             private static readonly DeviceClient deviceClient = DeviceClient
                 .CreateFromConnectionString(_conn, TransportType.Mqtt);
 
 
-            static void Main(string[] args)
+        }
+     
+        private static readonly Random rnd = new Random();
+      
+        private void btnSendMessage_Click(object sender, RoutedEventArgs e)
+        {
+            while (true)
             {
 
-                DeviceServiceUWP.SendMessageAsync(deviceClient).GetAwaiter();
-                DeviceServiceUWP.ReciveMessageAsync(deviceClient).GetAwaiter();
+                var data = new TemperatureModelsUWP
+                {
+                    Temperature = rnd.Next(20, 30),
+                    Humidity = rnd.Next(40, 50)
 
-                Console.ReadKey();
+                };
+
+
+                //JSON skriver ut såhär STANDARD som alla applikationer kan läsa, därför konverterar vi {temperature : 20, humidity 44 }
+                var json = JsonConvert.SerializeObject(data);
+
+                var payload = new Message(Encoding.UTF8.GetBytes(json));
+                Console.WriteLine(lvTemperature);
+
+                Console.WriteLine($"Message sent {json}");
+
+                //  await Task.Delay(10 * 1000);
 
 
             }
-
-
-
-
         }
     }
 }
