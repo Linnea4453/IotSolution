@@ -18,7 +18,6 @@ namespace ConsoleApp
         {
            DeviceService.SendMessageAsync(deviceClient).GetAwaiter();
             DeviceService.ReciveMessageAsync(deviceClient).GetAwaiter();
-
             Console.ReadKey();
         }
     }

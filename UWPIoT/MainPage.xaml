@@ -33,7 +33,7 @@
 
         </Grid>
 
-        <ListView x:Name="lvTemperature" ItemsSource="{x:Bind message}" Grid.Row="1" Margin="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ListView x:Name="lvTemperature" Grid.Row="1" Margin="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

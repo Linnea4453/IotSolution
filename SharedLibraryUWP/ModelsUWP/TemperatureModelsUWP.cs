@@ -8,10 +8,17 @@ using System.Threading.Tasks;
 
 namespace SharedLibraryUWP.ModelsUWP
 {
+  /* public static class Sendbool
+    {
+        public static bool sendingbool { get; set; }
+    }
+  */
+
     public class TemperatureModelsUWP 
     {
         public double Temperature { get; set; }
         public double Humidity { get; set; }
+
     }
 
    

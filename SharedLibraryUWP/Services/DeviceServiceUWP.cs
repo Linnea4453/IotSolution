@@ -7,7 +7,7 @@ using MAD = Microsoft.Azure.Devices;
 using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 using SharedLibraryUWP.ModelsUWP;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace SharedLibraryUWP.Services
 {
@@ -16,27 +16,30 @@ namespace SharedLibraryUWP.Services
 
 
         private static readonly Random rnd = new Random();
-
+        
 
         //DeviceClient = Iot (Bilen)
         public static async Task SendMessageAsync(DeviceClient deviceClient)
         {
+           
+           
+
             while (true)
             {
 
                 var data = new TemperatureModelsUWP
                 {
                     Temperature = rnd.Next(20, 30),
-                    Humidity = rnd.Next(40, 50)
+                    Humidity = rnd.Next(40, 50),
 
                 };
                 //JSON skriver ut såhär STANDARD som alla applikationer kan läsa, därför konverterar vi {temperature : 20, humidity 44 }
                 var json = JsonConvert.SerializeObject(data);
+                
+              var payload = new Message(Encoding.UTF8.GetBytes(json));
+               await deviceClient.SendEventAsync(payload);
 
-                var payload = new Message(Encoding.UTF8.GetBytes(json));
-                await deviceClient.SendEventAsync(payload);
-
-           //     Console.WriteLine($"Message sent {json}");
+                Console.WriteLine($"Message sent {json}");
 
                // await Task.Delay(10 * 1000);
 
@@ -58,15 +61,14 @@ namespace SharedLibraryUWP.Services
 
             }
 
-
         }
 
-        //VG del
+        /*VG del
         //Service Client = IotHub (Mobilen)
         public static async Task SendMessageToDeviceAsync(MAD.ServiceClient serviceClient, string targetDeviceId, string message)
         {
             var payload = new MAD.Message(Encoding.UTF8.GetBytes(message));
             await serviceClient.SendAsync(targetDeviceId, payload);
-        } 
+        } */
     }
 }
