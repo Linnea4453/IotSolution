@@ -47,9 +47,7 @@ namespace UWPIoT
         private void btnSendMessage_Click(object sender, RoutedEventArgs e)
         {
             if (Sendingbool) ;
-            Task<DeviceServiceUWP.SendMessageAsync>
-
-                assdsd 
+           
             ;
 
             
