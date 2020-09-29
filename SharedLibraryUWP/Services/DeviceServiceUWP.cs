@@ -11,9 +11,15 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace SharedLibraryUWP.Services
 {
+
+    
     public static class DeviceServiceUWP
     {
 
+        class Program
+        {
+           
+        }
 
         private static readonly Random rnd = new Random();
         
@@ -22,8 +28,6 @@ namespace SharedLibraryUWP.Services
         public static async Task SendMessageAsync(DeviceClient deviceClient)
         {
            
-           
-
             while (true)
             {
 
@@ -36,12 +40,12 @@ namespace SharedLibraryUWP.Services
                 //JSON skriver ut såhär STANDARD som alla applikationer kan läsa, därför konverterar vi {temperature : 20, humidity 44 }
                 var json = JsonConvert.SerializeObject(data);
                 
-              var payload = new Message(Encoding.UTF8.GetBytes(json));
+               var payload = new Message(Encoding.UTF8.GetBytes(json));
                await deviceClient.SendEventAsync(payload);
 
                 Console.WriteLine($"Message sent {json}");
 
-               // await Task.Delay(10 * 1000);
+               await Task.Delay(10 * 1000);
 
             }
         }       //Skicka meddelande

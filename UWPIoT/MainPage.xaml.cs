@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
@@ -24,35 +25,26 @@ namespace UWPIoT
     /// </summary>
     public sealed partial class MainPage : Page
     {
-       
-           
+
+
 
         public MainPage()
         {
             this.InitializeComponent();
-           
-        }
 
-        class Program
-        {
-            private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=UWPIot;SharedAccessKey=OBlP9NT32G2sMTUoe3OyyWfvK51jwoSQAlbbFSuNYYE=";   //"Här lägger du meddelande från azure, Connection string "
 
-            private static readonly DeviceClient deviceClient = DeviceClient
-                .CreateFromConnectionString(_conn, TransportType.Mqtt);
         }
-     
-        private static readonly Random rnd = new Random();
-        public static bool Sendingbool = true;
+        private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=UWPIot;SharedAccessKey=OBlP9NT32G2sMTUoe3OyyWfvK51jwoSQAlbbFSuNYYE=";   //"Här lägger du meddelande från azure, Connection string "
+
+        private static readonly DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(_conn, TransportType.Mqtt);
+
 
         private void btnSendMessage_Click(object sender, RoutedEventArgs e)
-        {
-            if (Sendingbool) ;
-           
-            ;
+            {
+            DeviceServiceUWP.SendMessageAsync(deviceClient);
+            }
 
             
-        }
-
-        }
     }
+}
 
