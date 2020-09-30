@@ -8,11 +8,8 @@ namespace ConsoleApp
 {
     class Program 
     {
-        private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=ConsoleApp;SharedAccessKey=qeGeFlp6JF34sorATZI6QM8ik1bwGnWfE3/zeCLaE7E=";   //"Här lägger du meddelande från azure, Connection string "
-       
-        private static readonly DeviceClient deviceClient = DeviceClient
-            .CreateFromConnectionString(_conn, TransportType.Mqtt);
-
+        private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=ConsoleApp;SharedAccessKey=qeGeFlp6JF34sorATZI6QM8ik1bwGnWfE3/zeCLaE7E=";
+        private static readonly DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(_conn, TransportType.Mqtt);
 
         static void Main(string[] args)
         {

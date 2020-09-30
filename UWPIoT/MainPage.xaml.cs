@@ -25,26 +25,16 @@ namespace UWPIoT
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
-
-
         public MainPage()
         {
             this.InitializeComponent();
-
-
         }
-        private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=UWPIot;SharedAccessKey=OBlP9NT32G2sMTUoe3OyyWfvK51jwoSQAlbbFSuNYYE=";   //"Här lägger du meddelande från azure, Connection string "
-
+        private static readonly string _conn = "HostName=linneaec-iothub.azure-devices.net;DeviceId=UWPIot;SharedAccessKey=OBlP9NT32G2sMTUoe3OyyWfvK51jwoSQAlbbFSuNYYE=";
         private static readonly DeviceClient deviceClient = DeviceClient.CreateFromConnectionString(_conn, TransportType.Mqtt);
-
-
         private void btnSendMessage_Click(object sender, RoutedEventArgs e)
             {
             DeviceServiceUWP.SendMessageAsync(deviceClient);
             }
-
-            
     }
 }
 
