@@ -19,7 +19,7 @@ namespace SharedLibraries.Services
 
                 var data = new TemperatureModel
                 {
-                    Temperature = rnd.Next(10, 30),
+                    Temperature = rnd.Next(20, 30),
                     Humidity = rnd.Next(40, 50)
                 };
                 var json = JsonConvert.SerializeObject(data);
